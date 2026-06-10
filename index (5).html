@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>DENGL | IT English</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #0B0E14;
+            font-family: -apple-system, 'Segoe UI', 'Inter', system-ui, sans-serif;
+            color: #E5E9F0;
+            line-height: 1.5;
+            padding: 1.5rem;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .card {
+            background: #11151F;
+            border-radius: 1rem;
+            border: 1px solid #2A2F3F;
+            padding: 1.75rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .card-header {
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 1px solid #2A2F3F;
+            font-weight: 600;
+            font-size: 1.35rem;
+            color: #D1D5DB;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .nav-row {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
+            border-bottom: 1px solid #252A3A;
+            padding-bottom: 0.75rem;
+        }
+
+        .nav-btn {
+            background: transparent;
+            border: none;
+            padding: 0.6rem 1.4rem;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: #8B92A8;
+            cursor: pointer;
+            border-radius: 2rem;
+            transition: 0.15s;
+        }
+
+        .nav-btn.active {
+            background: #2D3748;
+            color: white;
+        }
+
+        .nav-btn:hover:not(.active) {
+            color: #CBD5E1;
+            background: #1E2538;
+        }
+
+        .input-group {
+            margin-bottom: 1.25rem;
+        }
+
+        .label {
+            display: block;
+            font-size: 0.8rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #8F9BB3;
+            margin-bottom: 0.4rem;
+        }
+
+        input, textarea, .input-styled, select {
+            width: 100%;
+            background: #0A0E16;
+            border: 1px solid #2D3348;
+            border-radius: 0.75rem;
+            padding: 0.8rem 1rem;
+            color: #EDF2F7;
+            font-size: 0.95rem;
+            font-family: inherit;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 60px;
+        }
+
+        input:focus, textarea:focus, select:focus {
+            outline: none;
+            border-color: #4B7BEC;
+            box-shadow: 0 0 0 2px rgba(75, 123, 236, 0.2);
+        }
+
+        button {
+            background: #2D3A5E;
+            border: none;
+            padding: 0.7rem 1.5rem;
+            border-radius: 2rem;
+            font-weight: 500;
+            font-size: 0.85rem;
+            color: white;
+            cursor: pointer;
+            transition: background 0.15s;
+        }
+
+        button.primary {
+            background: #3B6EFB;
+        }
+
+        button.primary:hover {
+            background: #2C5AE0;
+        }
+
+        button.secondary {
+            background: #2A2F42;
+        }
+
+        button.secondary:hover {
+            background: #3A405B;
+        }
+
+        button.danger {
+            background: #B91C1C;
+        }
+
+        button.danger:hover {
+            background: #991B1B;
+        }
+
+        .flex-row {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .progress-wrapper {
+            margin-bottom: 1.5rem;
+        }
+        .progress-stats {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.8rem;
+            margin-bottom: 0.4rem;
+            color: #9CA3AF;
+        }
+        .progress-bar {
+            height: 6px;
+            background: #202433;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        .progress-fill {
+            width: 0%;
+            height: 100%;
+            background: #3B6EFB;
+            border-radius: 4px;
+        }
+
+        .task-block {
+            background: #0E121C;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            margin: 1.25rem 0;
+            border-left: 3px solid #3B6EFB;
+        }
+
+        .badge {
+            font-size: 0.7rem;
+            background: #1E243A;
+            display: inline-block;
+            padding: 0.2rem 0.7rem;
+            border-radius: 20px;
+            color: #9CA9D0;
+            letter-spacing: 0.3px;
+        }
+
+        .options-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 0.7rem;
+            margin: 1rem 0;
+        }
+
+        .option-item {
+            background: #0F131E;
+            border: 1px solid #292F44;
+            border-radius: 0.75rem;
+            padding: 0.75rem;
+            text-align: center;
+            cursor: pointer;
+            transition: 0.1s;
+        }
+
+        .option-item:hover {
+            border-color: #4B7BEC;
+            background: #161C2C;
+        }
+
+        .letters-pool {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+            margin: 1rem 0;
+        }
+        .letter {
+            background: #1A1F2E;
+            padding: 0.6rem 1.2rem;
+            border-radius: 0.6rem;
+            font-weight: 600;
+            font-size: 1.1rem;
+            cursor: pointer;
+            border: 1px solid #2D3448;
+        }
+        .letter.used {
+            opacity: 0.4;
+            pointer-events: none;
+        }
+        .constructed-area {
+            background: #0B0F17;
+            border-radius: 0.75rem;
+            padding: 0.8rem;
+            margin: 1rem 0;
+            min-height: 60px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            border: 1px dashed #334155;
+        }
+        .letter-chip {
+            background: #2D3A5E;
+            padding: 0.3rem 0.9rem;
+            border-radius: 2rem;
+            font-size: 0.9rem;
+        }
+
+        .timer-digit {
+            font-family: monospace;
+            font-size: 2rem;
+            font-weight: 600;
+            color: #FACC15;
+        }
+
+        .alert {
+            padding: 0.75rem 1rem;
+            border-radius: 0.75rem;
+            margin-top: 1rem;
+            font-size: 0.85rem;
+        }
+        .alert-success {
+            background: #0F2A1F;
+            border-left: 3px solid #22C55E;
+            color: #BBF7D0;
+        }
+        .alert-error {
+            background: #2A1A1F;
+            border-left: 3px solid #EF4444;
+            color: #FECACA;
+        }
+        .info-card {
+            background: #0F172A;
+            border-radius: 0.75rem;
+            padding: 1rem;
+            margin-top: 1rem;
+            border: 1px solid #334155;
+        }
+        .definition-text {
+            font-size: 0.9rem;
+            line-height: 1.4;
+            color: #CBD5E1;
+        }
+
+        .word-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #0E121C;
+            padding: 0.6rem 1rem;
+            border-radius: 0.75rem;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        .result-circle {
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            background: #1E253A;
+            margin: 1.5rem auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            font-weight: 700;
+            border: 2px solid #3B6EFB;
+        }
+
+        .word-list-scroll {
+            max-height: 500px;
+            overflow-y: auto;
+            padding-right: 0.5rem;
+        }
+
+        .grid-2cols {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 1.5rem;
+        }
+
+        .back-btn {
+            background: #2A2F42;
+            padding: 0.4rem 1rem;
+            font-size: 0.8rem;
+        }
+
+        .back-btn:hover {
+            background: #3A405B;
+        }
+
+        @media (max-width: 900px) {
+            .grid-2cols { grid-template-columns: 1fr; }
+            body { padding: 1rem; }
+            .card { padding: 1.25rem; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="nav-row">
+        <button class="nav-btn" data-page="auth">Вход</button>
+        <button class="nav-btn hidden" data-page="tasks">Задания</button>
+        <button class="nav-btn hidden" data-page="results">Результаты</button>
+        <button class="nav-btn hidden" data-page="admin">Конструктор</button>
+    </div>
+
+    <div id="userBar" class="card hidden" style="margin-bottom: 1rem; padding: 0.8rem 1.5rem;">
+        <div class="flex-row">
+            <span><strong id="userLoginDisplay">user</strong> <span style="color:#8B92A8; font-size:0.8rem;" id="userRoleSpan"></span></span>
+            <button id="logoutBtn" class="danger" style="padding:0.3rem 1rem;">Выйти</button>
+        </div>
+    </div>
+
+    <div id="authPage" class="card">
+        <div class="card-header">DENGL — вход</div>
+        <div class="input-group"><div class="label">Логин</div><input type="text" id="loginField" value="admin123"></div>
+        <div class="input-group"><div class="label">Пароль</div><input type="password" id="passwordField" value="admin123"></div>
+        <div class="flex-row"><button id="loginBtn" class="primary">Войти</button><button id="registerBtn" class="secondary">Регистрация</button></div>
+        <div id="authMessage"></div>
+    </div>
+
+    <div id="tasksPage" class="hidden">
+        <div class="card">
+            <div class="card-header">
+                <span>Задания</span>
+                <button id="refreshTasksBtn" class="back-btn">⟳ Обновить</button>
+            </div>
+            <div class="progress-wrapper">
+                <div class="progress-stats"><span>Прогресс</span><span id="progressPercent">0%</span></div>
+                <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+            </div>
+            <div id="taskContainer"></div>
+            <div class="flex-row" style="margin-top: 1rem;">
+                <button id="nextTaskBtn" class="primary hidden" style="flex:1;">Следующее задание →</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="resultsPage" class="hidden card" style="text-align:center;">
+        <div class="card-header">
+            <span>Результаты</span>
+            <button id="backFromResultsBtn" class="back-btn">← Назад</button>
+        </div>
+        <div class="result-circle" id="resultCircle">0%</div>
+        <div class="flex-row" style="justify-content:center; gap:2rem; margin:1.5rem 0;">
+            <div><span style="font-size:1.7rem; font-weight:700;" id="finalCorrect">0</span><br><span style="color:#8B92A8;">верно</span></div>
+            <div><span style="font-size:1.7rem; font-weight:700;" id="finalTotal">0</span><br><span style="color:#8B92A8;">всего</span></div>
+        </div>
+        <button id="restartBtn" class="primary">Пройти заново</button>
+    </div>
+
+    <div id="adminPage" class="hidden">
+        <div class="grid-2cols">
+            <div class="card">
+                <div class="card-header">Редактор</div>
+                <div class="input-group">
+                    <div class="label">Русский</div>
+                    <input type="text" id="newRuWord" placeholder="например: контейнер">
+                </div>
+                <div class="input-group">
+                    <div class="label">English</div>
+                    <input type="text" id="newEnWord" placeholder="container">
+                </div>
+                <div class="input-group">
+                    <div class="label">Определение</div>
+                    <textarea id="newDefinition" placeholder="Определение термина"></textarea>
+                </div>
+                <button id="addWordBtn" class="primary" style="width:100%; margin-bottom:1rem;">Добавить</button>
+                
+                <div class="label">Импорт/Экспорт</div>
+                <div class="flex-row" style="margin-bottom:1rem;">
+                    <button id="exportDbBtn" class="secondary">Экспорт JSON</button>
+                    <label class="secondary" style="background:#2A2F42; padding:0.5rem 1rem; border-radius:2rem; cursor:pointer;">Импорт JSON<input type="file" id="importDbInput" accept=".json" style="display:none;"></label>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <span>Словарь</span>
+                    <span id="totalWordsCount" style="font-size:0.9rem; color:#8B92A8;">0 слов</span>
+                </div>
+                <div id="wordsListContainer" class="word-list-scroll" style="max-height:500px; overflow-y:auto;"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // ====================== БАЗА СЛОВАРЯ ======================
+    let DB = {
+        words: [],
+        users: [{ login: "admin123", password: "admin123", role: "admin" }]
+    };
+    
+    const defaultWords = [
+        { russian: "алгоритм", english: "algorithm", definition: "Последовательность четких инструкций для решения задачи." },
+        { russian: "массив", english: "array", definition: "Упорядоченная коллекция элементов одного типа, доступных по индексу." },
+        { russian: "бинарный поиск", english: "binary search", definition: "Эффективный алгоритм поиска элемента в отсортированном массиве." },
+        { russian: "баг", english: "bug", definition: "Ошибка в программе, приводящая к некорректной работе." },
+        { russian: "компилятор", english: "compiler", definition: "Программа, переводящая исходный код в машинный целиком." },
+        { russian: "отладка", english: "debugging", definition: "Процесс поиска и исправления ошибок в программе." },
+        { russian: "сервер", english: "server", definition: "Компьютер или программа, предоставляющая услуги другим устройствам." },
+        { russian: "клиент", english: "client", definition: "Устройство или программа, запрашивающая услуги у сервера." },
+        { russian: "фреймворк", english: "framework", definition: "Каркас приложения, предоставляющий готовую архитектуру для разработки." },
+        { russian: "база данных", english: "database", definition: "Организованный набор структурированных данных для хранения и доступа." },
+        { russian: "кэш", english: "cache", definition: "Промежуточное хранилище для ускорения доступа к часто используемым данным." },
+        { russian: "контейнер", english: "container", definition: "Изолированная среда для запуска приложений с собственными зависимостями." },
+        { russian: "развертывание", english: "deployment", definition: "Процесс установки и запуска приложения в целевой среде." },
+        { russian: "микросервис", english: "microservice", definition: "Небольшой независимый сервис, входящий в состав распределенной системы." },
+        { russian: "поток", english: "thread", definition: "Наименьшая единица выполнения внутри процесса." },
+        { russian: "синхронизация", english: "synchronization", definition: "Механизм координации доступа к общим ресурсам из разных потоков." },
+        { russian: "мьютекс", english: "mutex", definition: "Объект синхронизации, обеспечивающий взаимоисключающий доступ к ресурсу." },
+        { russian: "сокет", english: "socket", definition: "Программный интерфейс для сетевого взаимодействия между процессами." },
+        { russian: "протокол", english: "protocol", definition: "Набор правил и форматов для обмена данными между устройствами." },
+        { russian: "транзакция", english: "transaction", definition: "Логическая единица работы с базой данных, обладающая свойствами ACID." },
+        { russian: "индекс", english: "index", definition: "Структура данных, ускоряющая поиск и извлечение строк из таблицы БД." },
+        { russian: "миграция", english: "migration", definition: "Изменение схемы базы данных с сохранением существующих данных." },
+        { russian: "репликация", english: "replication", definition: "Копирование данных с одного сервера на другой для отказоустойчивости." },
+        { russian: "шардирование", english: "sharding", definition: "Горизонтальное разделение данных по разным серверам." },
+        { russian: "REST API", english: "rest api", definition: "Архитектурный стиль для построения веб-сервисов на основе HTTP." },
+        { russian: "граф", english: "graph", definition: "Структура данных из вершин и ребер для моделирования связей." },
+        { russian: "очередь", english: "queue", definition: "Структура данных с дисциплиной FIFO (первым пришел — первым ушел)." },
+        { russian: "стек", english: "stack", definition: "Структура данных с дисциплиной LIFO (последним пришел — первым ушел)." },
+        { russian: "словарь", english: "dictionary", definition: "Структура данных для хранения пар ключ-значение с быстрым доступом." },
+        { russian: "дженерик", english: "generic", definition: "Средство параметризации типов для создания типобезопасных коллекций." },
+        { russian: "интерфейс", english: "interface", definition: "Контракт, определяющий набор методов для реализации классом." },
+        { russian: "полиморфизм", english: "polymorphism", definition: "Возможность объектов разных типов реагировать на одни и те же вызовы." },
+        { russian: "наследование", english: "inheritance", definition: "Механизм создания нового класса на основе существующего." },
+        { russian: "коммит", english: "commit", definition: "Фиксация изменений в системе контроля версий." },
+        { russian: "репозиторий", english: "repository", definition: "Хранилище кода и истории изменений в Git." },
+        { russian: "ветка", english: "branch", definition: "Отдельная линия разработки, изолированная от основной." },
+        { russian: "слияние", english: "merge", definition: "Объединение изменений из одной ветки в другую." },
+        { russian: "пулреквест", english: "pull request", definition: "Запрос на включение изменений в основную ветку репозитория." },
+        { russian: "ревью", english: "code review", definition: "Проверка кода другими разработчиками для улучшения качества." },
+        { russian: "юнит-тест", english: "unit test", definition: "Тестирование отдельного компонента программы в изоляции." },
+        { russian: "интеграция", english: "integration", definition: "Объединение компонентов системы в работающее целое." },
+        { russian: "лог", english: "log", definition: "Запись событий, происходящих в работающей системе." },
+        { russian: "деплой", english: "deploy", definition: "Процесс выкатки новой версии приложения на сервер." },
+        { russian: "оркестрация", english: "orchestration", definition: "Автоматизация управления контейнерами и сервисами." },
+        { russian: "мониторинг", english: "monitoring", definition: "Наблюдение за состоянием системы и сбор метрик." },
+        { russian: "алерт", english: "alert", definition: "Уведомление о возникновении проблемы в системе." },
+        { russian: "масштабирование", english: "scaling", definition: "Увеличение производительности системы за счет ресурсов." },
+        { russian: "балансировщик", english: "load balancer", definition: "Устройство, распределяющее нагрузку между серверами." },
+        { russian: "кластер", english: "cluster", definition: "Группа серверов, работающих как единая система." },
+        { russian: "образ", english: "image", definition: "Статический шаблон для создания контейнеров." },
+        { russian: "докерфайл", english: "Dockerfile", definition: "Файл с инструкциями для сборки Docker-образа." },
+        { russian: "том", english: "volume", definition: "Механизм для постоянного хранения данных в контейнерах." },
+        { russian: "порт", english: "port", definition: "Числовой идентификатор сетевого соединения на уровне транспорта." },
+        { russian: "под", english: "pod", definition: "Группа контейнеров в Kubernetes, разделяющих сеть и хранилище." }
+    ];
+    
+    function initDB() {
+        const saved = localStorage.getItem("dengl_v4");
+        if (saved) {
+            try {
+                const p = JSON.parse(saved);
+                if (p.words && p.words.length > 50 && p.users) DB = p;
+                else DB.words = [...defaultWords];
+            } catch(e) { DB.words = [...defaultWords]; }
+        } else {
+            DB.words = [...defaultWords];
+        }
+        saveDB();
+    }
+    
+    function saveDB() { localStorage.setItem("dengl_v4", JSON.stringify(DB)); }
+    initDB();
+    
+    let currentUser = null;
+    let taskQueue = [];
+    let currentTaskIdx = 0;
+    let correctAnswers = 0;
+    let speedInterval = null;
+    let constructorState = { letters: [], usedIdx: [], current: [], target: "", targetWordObj: null };
+    
+    function updateNavAndUser() {
+        const navBtns = document.querySelectorAll('.nav-btn');
+        const userBar = document.getElementById('userBar');
+        if (!currentUser) {
+            userBar.classList.add('hidden');
+            navBtns.forEach(btn => btn.classList.add('hidden'));
+            document.querySelector('[data-page="auth"]').classList.remove('hidden');
+            return;
+        }
+        userBar.classList.remove('hidden');
+        document.getElementById('userLoginDisplay').innerText = currentUser.login;
+        document.getElementById('userRoleSpan').innerText = currentUser.role === 'admin' ? 'админ' : 'пользователь';
+        navBtns.forEach(btn => {
+            const page = btn.getAttribute('data-page');
+            if (page === 'auth') btn.classList.add('hidden');
+            else if (page === 'tasks' || page === 'results' || (page === 'admin' && currentUser.role === 'admin')) {
+                btn.classList.remove('hidden');
+            } else btn.classList.add('hidden');
+        });
+    }
+    
+    function showPage(pageId) {
+        document.getElementById('authPage').classList.add('hidden');
+        document.getElementById('tasksPage').classList.add('hidden');
+        document.getElementById('resultsPage').classList.add('hidden');
+        document.getElementById('adminPage').classList.add('hidden');
+        document.getElementById(`${pageId}Page`).classList.remove('hidden');
+        document.querySelectorAll('.nav-btn').forEach(btn => {
+            if (btn.getAttribute('data-page') === pageId) btn.classList.add('active');
+            else btn.classList.remove('active');
+        });
+        if (pageId === 'admin' && currentUser?.role === 'admin') renderWordList();
+        if (pageId === 'results') updateResultsUI();
+    }
+    
+    function buildTasks() {
+        if (DB.words.length < 4) { alert("Добавьте минимум 4 термина в словарь (вкладка Конструктор)"); return false; }
+        const shuffled = [...DB.words].sort(() => Math.random() - 0.5);
+        const tasks = [];
+        for (let i = 0; i < Math.min(15, shuffled.length); i++) {
+            const word = shuffled[i];
+            const type = (i % 5) + 1;
+            const task = { type, word };
+            if (type === 3) {
+                let others = DB.words.filter(w => w.english !== word.english).map(w => w.english);
+                let opts = [word.english, ...others.slice(0, 2)];
+                task.options = opts.sort(() => Math.random() - 0.5);
+            }
+            if (type === 5) task.letters = word.english.split('').sort(() => Math.random() - 0.5);
+            tasks.push(task);
+        }
+        taskQueue = tasks;
+        currentTaskIdx = 0;
+        correctAnswers = 0;
+        updateProgressBar();
+        renderCurrentTask();
+        return true;
+    }
+    
+    function refreshTasks() { buildTasks(); }
+    
+    function updateProgressBar() {
+        const total = taskQueue.length;
+        const done = currentTaskIdx;
+        const percent = total ? (done / total) * 100 : 0;
+        document.getElementById('progressFill').style.width = percent + '%';
+        document.getElementById('progressPercent').innerText = Math.floor(percent) + '%';
+    }
+    
+    function showDefinitionCard(word) {
+        const container = document.getElementById('taskContainer');
+        const existing = document.getElementById('wordInfoCard');
+        if (existing) existing.remove();
+        const div = document.createElement('div');
+        div.id = 'wordInfoCard';
+        div.className = 'info-card';
+        div.innerHTML = `
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.5rem;">
+                <strong style="color:#60A5FA; font-size:1rem;">${word.english}</strong>
+                <span style="background:#1E293B; padding:0.2rem 0.7rem; border-radius:1rem; font-size:0.8rem;">${word.russian}</span>
+            </div>
+            <div class="definition-text">
+                ${word.definition || 'Определение термина в IT-сфере.'}
+            </div>
+        `;
+        container.appendChild(div);
+    }
+    
+    function renderCurrentTask() {
+        if (currentTaskIdx >= taskQueue.length) { finishAllTasks(); return; }
+        if (speedInterval) clearInterval(speedInterval);
+        const task = taskQueue[currentTaskIdx];
+        const container = document.getElementById('taskContainer');
+        document.getElementById('nextTaskBtn').classList.add('hidden');
+        const w = task.word;
+        if (task.type === 1) {
+            container.innerHTML = `<div class="task-block"><span class="badge">СОПОСТАВЛЕНИЕ</span><p style="margin:1rem 0"><strong>${w.russian}</strong></p><input id="ansInput" class="input-styled" placeholder="введите перевод"><button class="primary" style="margin-top:0.8rem" onclick="checkMatch('${w.english.replace(/'/g,"\\'")}', ${JSON.stringify(w).replace(/"/g, '&quot;')})">Ответ</button></div>`;
+        } else if (task.type === 2) {
+            container.innerHTML = `<div class="task-block"><span class="badge">ПЕРЕВОД НА РУССКИЙ</span><p><strong>${w.english}</strong></p><input id="ansInput" class="input-styled"><button class="primary" style="margin-top:0.8rem" onclick="checkTranslate('${w.russian.replace(/'/g,"\\'")}', ${JSON.stringify(w).replace(/"/g, '&quot;')})">Ответ</button></div>`;
+        } else if (task.type === 3) {
+            let optsHtml = task.options.map(opt => `<div class="option-item" onclick="checkChoice('${opt.replace(/'/g,"\\'")}','${w.english.replace(/'/g,"\\'")}', ${JSON.stringify(w).replace(/"/g, '&quot;')})">${opt}</div>`).join('');
+            container.innerHTML = `<div class="task-block"><span class="badge">ВЫБОР ПЕРЕВОДА</span><p><strong>${w.russian}</strong></p><div class="options-grid">${optsHtml}</div></div>`;
+        } else if (task.type === 4) {
+            container.innerHTML = `<div class="task-block"><span class="badge">СПРИНТ (10 сек)</span><div class="timer-digit" id="timerDisplay">10</div><p><strong>${w.russian}</strong></p><input id="speedInput" class="input-styled"><button id="speedCheckBtn" class="primary">Готово</button></div>`;
+            startSpeedTask(w);
+        } else if (task.type === 5) {
+            constructorState = { letters: [...task.letters], usedIdx: [], current: [], target: w.english, targetWordObj: w };
+            renderConstructorUI(w);
+        }
+    }
+    
+    window.checkMatch = (correct, wordObj) => { let val = document.getElementById('ansInput')?.value.trim().toLowerCase(); if(val === correct.toLowerCase()) correctAnswers++; showResultMsg(val === correct.toLowerCase(), correct, wordObj); disableAndNext(); };
+    window.checkTranslate = (corr, wordObj) => { let val = document.getElementById('ansInput')?.value.trim().toLowerCase(); if(val === corr.toLowerCase()) correctAnswers++; showResultMsg(val === corr.toLowerCase(), corr, wordObj); disableAndNext(); };
+    window.checkChoice = (selected, correct, wordObj) => { if(selected === correct) correctAnswers++; showResultMsg(selected === correct, correct, wordObj); disableAndNext(); };
+    
+    function startSpeedTask(wordObj) {
+        let time=10; let disp=document.getElementById('timerDisplay'); let btn=document.getElementById('speedCheckBtn'); let inp=document.getElementById('speedInput');
+        if (speedInterval) clearInterval(speedInterval);
+        speedInterval = setInterval(()=>{ time--; if(disp) disp.innerText=time; if(time<=0){ clearInterval(speedInterval); showResultMsg(false, wordObj.english, wordObj); disableAndNext(); } },1000);
+        btn.onclick = ()=>{ clearInterval(speedInterval); let ans=inp.value.trim().toLowerCase(); if(ans===wordObj.english.toLowerCase()) correctAnswers++; showResultMsg(ans===wordObj.english.toLowerCase(), wordObj.english, wordObj); disableAndNext(); };
+    }
+    
+    function renderConstructorUI(wordObj) {
+        let lettersHtml = constructorState.letters.map((l,idx)=>`<div class="letter ${constructorState.usedIdx.includes(idx)?'used':''}" onclick="pickLetter(${idx},'${l}')">${l}</div>`).join('');
+        let currentHtml = constructorState.current.map(c=>`<span class="letter-chip">${c}</span>`).join('');
+        document.getElementById('taskContainer').innerHTML = `<div class="task-block"><span class="badge">КОНСТРУКТОР</span><p><strong>${wordObj.russian}</strong></p><div class="constructed-area">${currentHtml || "соберите слово"}</div><div class="letters-pool">${lettersHtml}</div><button class="secondary" onclick="resetConstructor()">Сброс</button> <button class="primary" onclick="submitConstructor('${wordObj.english.replace(/'/g,"\\'")}', ${JSON.stringify(wordObj).replace(/"/g, '&quot;')})">Проверить</button></div>`;
+    }
+    window.pickLetter = (idx, letter) => { if(constructorState.usedIdx.includes(idx)) return; constructorState.usedIdx.push(idx); constructorState.current.push(letter); renderCurrentTask(); };
+    window.resetConstructor = () => { const task = taskQueue[currentTaskIdx]; constructorState = { letters: [...task.letters], usedIdx: [], current: [], target: task.word.english, targetWordObj: task.word }; renderCurrentTask(); };
+    window.submitConstructor = (correct, wordObj) => { let userWord = constructorState.current.join('').toLowerCase(); if(userWord === correct.toLowerCase()) correctAnswers++; showResultMsg(userWord === correct.toLowerCase(), correct, wordObj); disableAndNext(); };
+    
+    function showResultMsg(ok, correctAns, wordObj) {
+        let cont = document.getElementById('taskContainer');
+        let div = document.createElement('div');
+        div.className = ok ? 'alert alert-success' : 'alert alert-error';
+        div.innerText = ok ? 'Верно' : `Ошибка. Правильно: ${correctAns}`;
+        cont.appendChild(div);
+        if (wordObj) showDefinitionCard(wordObj);
+    }
+    
+    function disableAndNext(){ if(speedInterval) clearInterval(speedInterval); document.getElementById('nextTaskBtn').classList.remove('hidden'); }
+    function nextTask(){ if(currentTaskIdx+1 < taskQueue.length){ currentTaskIdx++; renderCurrentTask(); updateProgressBar(); } else finishAllTasks(); }
+    function finishAllTasks(){ localStorage.setItem('lastSessionStats', JSON.stringify({correct:correctAnswers, total:taskQueue.length})); showPage('results'); updateResultsUI(); }
+    function updateResultsUI(){ let saved = localStorage.getItem('lastSessionStats'); let corr=0, total=1; if(saved){ let d=JSON.parse(saved); corr=d.correct; total=d.total; } let perc=total? Math.round((corr/total)*100):0; document.getElementById('resultCircle').innerHTML = perc+'%'; document.getElementById('finalCorrect').innerText=corr; document.getElementById('finalTotal').innerText=total; }
+    function restartSession(){ buildTasks(); showPage('tasks'); }
+    function backFromResultsToTasks() { showPage('tasks'); }
+    
+    function renderWordList() {
+        const container = document.getElementById('wordsListContainer');
+        document.getElementById('totalWordsCount').innerHTML = `${DB.words.length} слов`;
+        if (!container) return;
+        container.innerHTML = DB.words.map((w, idx) => `
+            <div class="word-row">
+                <div style="flex:1;">
+                    <span style="color:#8B92A8;">${w.english}</span> → ${w.russian}
+                    <div style="font-size:0.7rem; color:#6B7280; margin-top:0.2rem;">${w.definition ? w.definition.substring(0,80) : ''}</div>
+                </div>
+                <div style="display:flex; gap:0.5rem;">
+                    <button class="secondary" style="padding:0.2rem 0.8rem;" onclick="editWord(${idx})">Ред</button>
+                    <button class="danger" style="padding:0.2rem 0.8rem;" onclick="deleteWord(${idx})">Удл</button>
+                </div>
+            </div>
+        `).join('');
+    }
+    
+    window.editWord = (idx) => {
+        const w = DB.words[idx];
+        document.getElementById('newRuWord').value = w.russian;
+        document.getElementById('newEnWord').value = w.english;
+        document.getElementById('newDefinition').value = w.definition || '';
+        window.editIndex = idx;
+        document.getElementById('addWordBtn').innerHTML = 'Обновить';
+    };
+    
+    window.deleteWord = (idx) => { if(confirm('Удалить термин?')){ DB.words.splice(idx,1); saveDB(); renderWordList(); if(window.editIndex === idx) { clearForm(); } } };
+    
+    function clearForm() {
+        document.getElementById('newRuWord').value = '';
+        document.getElementById('newEnWord').value = '';
+        document.getElementById('newDefinition').value = '';
+        window.editIndex = null;
+        document.getElementById('addWordBtn').innerHTML = 'Добавить';
+    }
+    
+    function addOrUpdateWord() {
+        let ru = document.getElementById('newRuWord').value.trim();
+        let en = document.getElementById('newEnWord').value.trim().toLowerCase();
+        let def = document.getElementById('newDefinition').value.trim();
+        if (!ru || !en) { alert("Заполните поля"); return; }
+        if (!def) def = "IT-термин, используемый в разработке.";
+        
+        if (window.editIndex !== undefined && window.editIndex !== null) {
+            DB.words[window.editIndex] = { russian: ru, english: en, definition: def };
+            window.editIndex = null;
+            document.getElementById('addWordBtn').innerHTML = 'Добавить';
+        } else {
+            if (DB.words.some(w => w.english === en)) { alert("Термин уже существует"); return; }
+            DB.words.push({ russian: ru, english: en, definition: def });
+        }
+        saveDB();
+        renderWordList();
+        clearForm();
+    }
+    
+    document.getElementById('addWordBtn')?.addEventListener('click', addOrUpdateWord);
+    document.getElementById('exportDbBtn')?.addEventListener('click', () => { let a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([JSON.stringify(DB)], {type:"application/json"})); a.download = "dengl_dict.json"; a.click(); });
+    document.getElementById('importDbInput')?.addEventListener('change', (e) => { let f = e.target.files[0]; if (!f) return; let r = new FileReader(); r.onload = ev => { try { let imp = JSON.parse(ev.target.result); if (imp.words && imp.users) { DB = imp; saveDB(); renderWordList(); alert("Импорт выполнен"); } else throw new Error(); } catch(err) { alert("Ошибка формата"); } }; r.readAsText(f); });
+    
+    document.getElementById('loginBtn')?.addEventListener('click', () => { let l = document.getElementById('loginField').value, p = document.getElementById('passwordField').value, user = DB.users.find(u => u.login === l && u.password === p); if (user) { currentUser = user; updateNavAndUser(); buildTasks(); showPage('tasks'); document.getElementById('authMessage').innerHTML = ''; } else document.getElementById('authMessage').innerHTML = '<div class="alert alert-error">Неверный логин/пароль</div>'; });
+    document.getElementById('registerBtn')?.addEventListener('click', () => { let l = document.getElementById('loginField').value, p = document.getElementById('passwordField').value; if (l && p) { if (DB.users.find(u => u.login === l)) { document.getElementById('authMessage').innerHTML = '<div class="alert alert-error">Пользователь существует</div>'; return; } DB.users.push({ login: l, password: p, role: "user" }); saveDB(); document.getElementById('authMessage').innerHTML = '<div class="alert alert-success">Регистрация успешна, войдите</div>'; } else alert("Заполните поля"); });
+    document.getElementById('logoutBtn')?.addEventListener('click', () => { currentUser = null; updateNavAndUser(); showPage('auth'); if (speedInterval) clearInterval(speedInterval); });
+    document.getElementById('nextTaskBtn')?.addEventListener('click', nextTask);
+    document.getElementById('restartBtn')?.addEventListener('click', restartSession);
+    document.getElementById('refreshTasksBtn')?.addEventListener('click', refreshTasks);
+    document.getElementById('backFromResultsBtn')?.addEventListener('click', backFromResultsToTasks);
+    
+    document.querySelectorAll('.nav-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            const page = btn.getAttribute('data-page');
+            if (page === 'admin' && currentUser?.role !== 'admin') return;
+            if (!currentUser && page !== 'auth') return;
+            showPage(page);
+        });
+    });
+    
+    updateNavAndUser();
+    showPage('auth');
+</script>
+</body>
+</html>
